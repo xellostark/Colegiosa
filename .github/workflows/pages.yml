@@ -1,0 +1,29 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          pip install mkdocs mkdocs-material
+
+      - name: Build and Deploy
+        run: |
+          mkdocs build
+          mv site/* $GITHUB_WORKSPACE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
