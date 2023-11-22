@@ -1,0 +1,138 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+</head>
+<style>
+    ::before,
+    ::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        background-color: #EBEDEF;
+        
+    }
+
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: auto;
+        background-color: #17202A;
+        min-width: 500px;
+    }
+
+    a{
+        position: relative;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        color: #a0a0a0;
+        font-size: 25px;
+        letter-spacing: 0.5px;
+        margin-left: 30px;
+    }
+
+    a::after{
+        content: "";
+        position: absolute;
+        background-color: #ff3c78;
+        height: 3px;
+        width: 0;
+        left: 0;
+        bottom: -10px;
+        transition: 0.3s;
+    }
+    a:hover{
+        color: white;
+    }
+    a:hover::after{
+        width: 100%;
+    }
+
+    /* Estilos del formulario de inicio de sesión */
+    .login-container {
+        background-color: #EBEDEF;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+
+    .login-container h1 {
+        color: #1976D2;
+    }
+
+    .login-container input {
+        margin-bottom: 10px;
+    }
+
+    .login-container button {
+        background-color: #1976D2;
+        color: #fff;
+    }
+
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+            <img src="{% static 'img/Colegio.jpg' %}" alt="..." style="height: 130px; width: 130px; border-radius: 10px; margin-left: 30px;" >
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container text-center login-container">
+        <h1>Inicio de Sesión</h1>
+        <form action="/login" method="post">
+            {% csrf_token %}
+            <input class="form-control form-control-lg text-center mb-2" type="text" placeholder="Nombre de Usuario" name="txtusu" required/>
+            <input class="form-control form-control-lg text-center mb-2" type="password" placeholder="Contraseña" name="txtpas" required/>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%">Login</button>
+        </form>
+
+        {% if r2 %}
+            <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                <h5>{{ r2 }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="container-fluid p-4" style="background-color: #17202A; color: #EBEDEF;">
+            <h5 class="text-uppercase">Colegio Sagrados</h5>
+            <p>Dirección: Calle Falsa 123, Rancagua City</p>
+            <p>Teléfono: (123) 456-7890</p>
+            <p>Email: info@colegiosagrados.com</p>
+
+            <div class="mt-4">
+                <a href="#" class="btn btn-primary btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="btn btn-info btn-floating m-1" role="button"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="btn btn-danger btn-floating m-1" role="button"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="btn btn-dark btn-floating m-1" role="button"><i class="bi bi-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="text-center p-3 w-100" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 Colegio Sagrados. Todos los derechos reservados.
+        </div>
+    </footer>
+</body>
+</html>

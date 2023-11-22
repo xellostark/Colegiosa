@@ -1,0 +1,298 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"/>
+
+</head>
+<script>
+    const botonCerrarSesion = () => {
+        if(window.confirm("¿Está Seguro De Querer Cerrar La Sesión?")){
+            window.location.href = "/logout";
+        }
+    }
+</script>
+
+
+
+<script>
+    const botonEliminar = (id) => {
+        if(window.confirm("¿Está Seguro(a) De Querer Eliminar El Registro?")){
+            window.location.href = "/eliminar_profesor/"+ id;
+        }
+    }
+</script>
+<script>
+    const botonEliminarAlumno = (id) => {
+        if(window.confirm("¿Está Seguro(a) De Querer Eliminar El Registro?")){
+            window.location.href = "/eliminar_alumno/"+ id;
+        }
+    }
+</script>
+<style>
+
+    ::before,
+    ::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    body{
+        background-color: #EBEDEF;
+    }
+    
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: auto;
+        background-color: #17202A;
+        min-width: 500px;
+    }
+    
+    a{
+        position: relative;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif;
+        color: #a0a0a0;
+        font-size: 25px;
+        letter-spacing: 0.5px;
+        margin-left: 30px;
+    }
+    
+    a::after{
+        content: "";
+        position: absolute;
+        background-color: #ff3c78;
+        height: 3px;
+        width: 0;
+        left: 0;
+        bottom: -10px;
+        transition: 0.3s;
+    }
+    a:hover{
+        color: white;
+    }
+    a:hover::after{
+        width: 100%;
+    }
+    </style>
+<body>
+    <nav class="navbar navbar-expand-lg" style="display: flex; align-items: center; justify-content: space-around; margin: auto; background-color: #17202A; min-width: 500px;">
+		<img src="{% static 'img/Colegio.jpg' %}" alt="..." style="height: 130px; width: 130px; border-radius: 10px; margin-left: 30px;">
+		<span class="navbar-brand text-white">Bienvenido</span>
+		<span class="navbar-brand text-white">{{ nomUsuario }}</span>
+		
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display: flex; align-items: center;">
+			<a class="nav-link text-center text-white" href="/menuAdmin">Inicio</a>
+            <a class="nav-link text-center text-white" href="/agregar_usuario">Agregar Usuario</a>
+			<a class="nav-link text-center text-white" href="/form_matricula">Gestionar Matricula</a>
+            <a class="nav-link text-center text-white" href="/profesores">Gestionar Profesores</a>
+            <a class="nav-link text-center text-white" href="/listar_usuarios">Lista de Usuarios</a>
+			<a class="nav-link text-center text-white" href="/listar_historial">Ver Historial</a>
+			<a class="nav-link text-center text-white" href="#" onClick="botonCerrarSesion()">Cerrar Sesión</a>
+		</div>
+	</nav>
+
+    <div class="container-list">
+        <form action="/actualizar_profe/{{ encontrado.id }}" method="post">  <!-- ACA SE SUPONE QUE LA WEA SIRVE PARA ACTUALIZAR EL PROFESOR Y EL ALUMNO PERO NO ME GUSTA COMO QUEDO  -->>
+            {% csrf_token %}
+            <center>
+                <h1>Actualización de Profesor</h1>
+                <input value="{{ encontrado.nombre }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Nombre del Profesor" name="nombre" required/>
+                <input value="{{ encontrado.apellido }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Apellido del Profesor" name="apellido" required/>
+                <input value="{{ encontrado.correo }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Correo del Profesor" name="correo" required/>
+                <input value="{{ encontrado.cargo }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Cargo del Profesor" name="cargo" required/>
+                <input value="{{ encontrado.asignatura }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Asignatura del Profesor" name="asignatura" required/>
+                <input type="submit" class="btn btn-primary btn-lg" style="width:95%;" value="Guardar Cambios"/>
+            </center>
+        </form>
+        <form action="/actualizar_alumno/{{ encontrado.id }}" method="post">
+            {% csrf_token %}
+            <center>
+                <h1>Actualización de Alumno</h1>
+                <input value="{{ encontrado.rut }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Rut del Alumno" name="rut" required/>
+                <input value="{{ encontrado.primer_nombre }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Primer Nombre del Alumno" name="primer_nombre" required/>
+                <input value="{{ encontrado.segundo_nombre }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Segundo Nombre del Alumno" name="segundo_nombre"/>
+                <input value="{{ encontrado.apellido_paterno }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Apellido Paterno del Alumno" name="apellido_paterno" required/>
+                <input value="{{ encontrado.apellido_materno }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Apellido Materno del Alumno" name="apellido_materno" required/>
+                <input value="{{ encontrado.edad }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Edad del Alumno" name="edad" required/>
+                <input value="{{ encontrado.nacionalidad }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Nacionalidad del Alumno" name="nacionalidad" required/>
+                <input value="{{ encontrado.curso }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Curso del Alumno" name="curso" required/>
+                <input value="{{ encontrado.sala }}" class="form-control form-control-lg text-center" style="margin-bottom:10px; width:95%;" type="text" placeholder="Sala del Alumno" name="sala" required/>
+                <input type="submit" class="btn btn-primary btn-lg" style="width:95%;" value="Guardar Cambios"/>
+            </center>
+        </form>
+        {% if r %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h5>{{ r }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    
+        {% if r2 %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h5>{{ r2 }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endif %}
+    
+        {% if profesor %}
+            <h1>Listado de Profesores</h1>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOMBRE</th>
+                        <th>APELLIDO</th>
+                        <th>CORREO ELECTRONICO</th>
+                        <th>CARGO</th>
+                        <th>ASIGNATURA</th>
+                        <th>EDITAR</th>
+                        <th>ELIMINAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for x in profesor %}
+                        <tr>
+                            <td>{{ x.id }}</td>
+                            <td>{{ x.nombre }}</td>
+                            <td>{{ x.apellido }}</td>
+                            <td>{{ x.correo }}</td>
+                            <td>{{ x.cargo }}</td>
+                            <td>{{ x.asignatura }}</td>
+
+                            <td>
+                                <a href="/cargar_datos/{{ x.id }}" class="btn btn-lg">
+                                    <i class="bi bi-pencil-fill"></i>
+                                </a>
+                            </td>                            
+    
+                            <td>
+                            </td>
+                            <td>
+                                <button type="button" onClick="botonEliminar({{ x.id }})" class="btn btn-lg">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    
+        {% if alumnos %}
+        <h1>Listado de Alumnos</h1>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>RUT</th>
+                    <th>PRIMER NOMBRE</th>
+                    <th>SEGUNDO NOMBRE</th>
+                    <th>APELLIDO PATERNO</th>
+                    <th>APELLIDO MATERNO</th>
+                    <th>EDAD</th>
+                    <th>NACIONALIDAD</th>
+                    <th>CURSO</th>
+                    <th>SALA</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in alumnos %}
+                    <tr>
+                        <td>{{ a.rut }}</td>
+                        <td>{{ a.primer_nombre }}</td>
+                        <td>{{ a.segundo_nombre }}</td>
+                        <td>{{ a.apellido_paterno }}</td>
+                        <td>{{ a.apellido_materno }}</td>
+                        <td>{{ a.edad }}</td>
+                        <td>{{ a.nacionalidad }}</td>
+                        <td>{{ a.curso }}</td>
+                        <td>{{ a.sala }}</td>
+                        <td>
+                            <a href="/cargar_datosa/{{ a.id }}" class="btn btn-lg">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="button" onClick="botonEliminarAlumno({{ a.id }})" class="btn btn-lg">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+    </div>
+
+    <h1>Listado de Usuarios</h1>
+
+    <table class="table table-hover" style="width: 80%; margin-top: 20px; border: 1px solid #ade1f1; border-collapse: collapse; margin-left: 20px; background-color: #9fabf9;">
+        <thead>
+            <tr style="background-color: #9fabf9;">
+                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">ID</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Nombre de Usuario</th>
+                <th style="padding: 12px; text-align: left; border: 1px solid #ddd;">Contraseña</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+                <tr style="border: 1px solid #a9b9fc;">
+                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">{{ usuario.id }}</td>
+                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">{{ usuario.nombre_usuario }}</td>
+                    <td style="padding: 12px; text-align: left; border: 1px solid #ddd;">{{ usuario.password_usuario }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+<footer class="bg-light text-center text-lg-start mt-5">
+	<div class="container-fluid p-4" style="background-color: #17202A; color: #EBEDEF;">
+		<h5 class="text-uppercase">Colegio Sagrados</h5>
+		<p>Dirección: Calle Falsa 123, Rancagua City</p>
+		<p>Teléfono: (123) 456-7890</p>
+		<p>Email: info@colegiosagrados.com</p>
+
+		<div class="mt-4">
+			<a href="#" class="btn btn-primary btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
+			<a href="#" class="btn btn-info btn-floating m-1" role="button"><i class="bi bi-twitter"></i></a>
+			<a href="#" class="btn btn-danger btn-floating m-1" role="button"><i class="bi bi-youtube"></i></a>
+			<a href="#" class="btn btn-dark btn-floating m-1" role="button"><i class="bi bi-instagram"></i></a>
+		</div>
+	</div>
+	<div class="text-center p-3 w-100" style="background-color: rgba(0, 0, 0, 0.2);">
+		© 2023 Colegio Sagrados. Todos los derechos reservados.
+	</div>
+</footer>
+</html>

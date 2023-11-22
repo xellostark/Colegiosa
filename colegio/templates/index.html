@@ -1,0 +1,198 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Sagrada Reprobacion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<style>
+
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #EBEDEF;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    background-color: #17202A;
+    min-width: 500px;
+}
+
+a{
+    position: relative;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    color: #a0a0a0;
+    font-size: 25px;
+    letter-spacing: 0.5px;
+    margin-left: 30px;
+}
+
+a::after{
+    content: "";
+    position: absolute;
+    background-color: #ff3c78;
+    height: 3px;
+    width: 0;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+a:hover{
+    color: white;
+}
+a:hover::after{
+    width: 100%;
+}
+</style>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg ">
+
+        <div class="container-fluid">
+
+            <img src="{% static 'img/Colegio.jpg' %}" alt="..." style="height: 130px; width: 130px; border-radius: 10px; margin-left: 30px;" >
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="mostrar_login">Inicio de Sesion</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <img src="{% static 'img/educacion1.jpg' %}" class="d-block w-100" style="height: 550px; padding-left: 100px; padding-right: 100px;" alt="...">
+            </div>
+
+            <div class="carousel-item">
+                <img src="{% static 'img/educacion2.jpg' %}" class="d-block w-100" style="height: 550px; padding-left: 100px; padding-right: 100px;" alt="...">
+            </div>
+
+            <div class="carousel-item">
+                <img src="{% static 'img/educacion2.jpg' %}" class="d-block w-100" style="height: 550px; padding-left: 100px; padding-right: 100px;" alt="...">
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-2">
+
+        <div class="col">
+            <div class="card h-100">
+
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title">Informacion</h4>
+                    <p class="card-text">Bienvenidos a Sagrada Reprobacion, un lugar donde el aprendizaje cobra vida. Nuestra escuela se enorgullece de ofrecer una educación de calidad que nutre las mentes jóvenes y fomenta la creatividad. Con un equipo dedicado de educadores y un ambiente amigable, aquí en [Nombre de la Escuela] nos esforzamos por inspirar y empoderar a nuestros estudiantes para que se conviertan en líderes del mañana.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title">Nuestro Enfoque</h4>
+                    <p class="card-text">En Sagrada Reprobacion, adoptamos un enfoque educativo innovador y centrado en el estudiante. Creemos que cada estudiante es único y tiene un potencial ilimitado. Nuestro plan de estudios está diseñado para fomentar el pensamiento crítico, la creatividad y el amor por el aprendizaje. Valoramos la diversidad y promovemos un ambiente inclusivo donde cada estudiante se siente valorado y apoyado en su viaje educativo.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+
+                <div class="card-body" style="text-align: center;">
+                    <h4 class="card-title">Nuestras Instalaciones y Recursos</h4>
+                    <p class="card-text">En Sagrada Reprobacion, nos esforzamos por proporcionar un entorno educativo excepcional. Nuestras instalaciones modernas incluyen aulas equipadas con la última tecnología, laboratorios científicos, una biblioteca bien surtida y áreas de recreación seguras y divertidas. Además, contamos con un equipo de apoyo dedicado que está disponible para ayudar a nuestros estudiantes en su desarrollo académico y personal.<br>Espero que estos textos sean útiles para tu diseño de la página web. Si necesitas más información o ajustes en los textos, no dudes en decírmelo. ¡Buena suerte con tu proyecto!</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+<br>
+<br>
+<footer class="bg-light text-center text-lg-start">
+    <div class="container-fluid p-4" style="background-color: #17202A; color: #EBEDEF;">
+        <h5 class="text-uppercase">Colegio Sagrados</h5>
+
+        <p>
+            Dirección: Calle Falsa 123, Rancagua City
+        </p>
+        <p>
+            Teléfono: (123) 456-7890
+        </p>
+        <p>
+            Email: info@colegiosagrados.com
+        </p>
+
+        <div class="mt-4">
+            <a href="#" class="btn btn-primary btn-floating m-1" role="button"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="btn btn-info btn-floating m-1" role="button"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="btn btn-danger btn-floating m-1" role="button"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="btn btn-dark btn-floating m-1" role="button"><i class="bi bi-instagram"></i></a>
+        </div>
+
+    </div>
+
+    <div class="text-center p-3 w-100" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Colegio Sagrados. Todos los derechos reservados.
+    </div>
+
+</footer>
+</html>
+</html>
